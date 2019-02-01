@@ -6,6 +6,7 @@ import datetime
 
 def main():
     ldap_server = input('LDAP SERVER url (eg. example.com): ')
+    # it should be the ldap_server
     server = Server(ldap_server, get_info=ALL)
     ldap_user = input('LDAP USER (eg. KAIDO89): ')
     ldap_pass = input('LDAP PASSWORD (eg. KAIDO89_PASSWORD): ')
