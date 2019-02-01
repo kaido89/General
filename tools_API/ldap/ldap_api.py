@@ -5,7 +5,7 @@ import datetime
 
 
 def main():
-    ldap_server = input('LDAP url (eg. example.com): ')
+    ldap_server = input('LDAP SERVER url (eg. example.com): ')
     server = Server(ldap_server, get_info=ALL)
     ldap_user = input('LDAP USER (eg. KAIDO89): ')
     ldap_pass = input('LDAP PASSWORD (eg. KAIDO89_PASSWORD): ')
@@ -15,8 +15,12 @@ def main():
     search_user_result = conn.search('dc='+str(forest).lower()+',dc=com',
                                      '(&(objectclass=person)(mailNickname=' + search_user + '))',
                                      attributes=[ALL_ATTRIBUTES, ALL_OPERATIONAL_ATTRIBUTES])
-    print(search_user_result)
-    print(conn.entries)
+    # confirmed search run correctly
+    if search_user_result:
+        print(conn.entries)
+    else:
+        print('Did not found this user')
+    conn.unbind()
 
 
 main()
