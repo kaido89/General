@@ -10,6 +10,7 @@ def main():
     server = Server(ldap_server, get_info=ALL)
     # it should have the login user
     ldap_user = input('LDAP USER (eg. KAIDO89): ')
+    # it should have the user password
     ldap_pass = input('LDAP PASSWORD (eg. KAIDO89_PASSWORD): ')
     forest = input('LDAP FOREST (eg. COMPANY_NAME): ')
     conn = Connection(server, user=forest+"\\"+ldap_user, password=ldap_pass, auto_bind=True)
