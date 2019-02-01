@@ -18,6 +18,7 @@ def main():
     # confirmed search run correctly
     if search_user_result:
         print(conn.entries)
+    # if did not found anything
     else:
         print('Did not found this user')
     conn.unbind()
