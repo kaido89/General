@@ -10,12 +10,13 @@ def main():
     ldap_user = input('LDAP USER (eg. KAIDO89): ')
     ldap_pass = input('LDAP PASSWORD (eg. KAIDO89_PASSWORD): ')
     forest = input('LDAP FOREST (eg. COMPANY_NAME): ')
-    Connection(server, user=forest+"\\"+ldap_user, password=ldap_pass, auto_bind=True)
+    conn = Connection(server, user=forest+"\\"+ldap_user, password=ldap_pass, auto_bind=True)
     search_user = input('SEARCH USER in LDAP (eg. KAIDO89_FRIEND): ')
     search_user_result = conn.search('dc='+str(forest).lower()+',dc=com',
                                      '(&(objectclass=person)(mailNickname=' + search_user + '))',
                                      attributes=[ALL_ATTRIBUTES, ALL_OPERATIONAL_ATTRIBUTES])
     print(search_user_result)
+    print(conn.entries)
 
 
 main()
