@@ -1,7 +1,5 @@
+#!/usr/bin/env python3
 from ldap3 import Server, Connection, ALL, ALL_ATTRIBUTES, ALL_OPERATIONAL_ATTRIBUTES
-import os
-import csv
-import datetime
 
 
 def main():
