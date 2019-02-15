@@ -3,9 +3,17 @@ import subprocess
 from time import sleep
 
 
-def verify_search_done(api_key, splunk_server, username, app_name, sid, flag_query_is_done, timer):
+def get_output(splunk_server, username, app_name, api_key, sid):
+    output_aux = subprocess.check_output('curl -k -H \"Authorization: Splunk ' + api_key + '\" '+splunk_server
+                                         + '/servicesNS/'+username+'/'+app_name+'/search/jobs/'+sid+'/results --get -d '
+                                         'output_mode=csv -d count=0', shell=True, universal_newlines=True)
+    output = output_aux.split('\n')
+    return output
+
+
+def verify_search_done(api_key, splunk_server, username, app_name, sid, flag_query_is_done, timer, num_timer):
     queried_done = subprocess.check_output('curl -k -H \"Authorization: Splunk '+api_key+'\" '+splunk_server
-                                           + 'servicesNS/'+username+'/'+app_name+'/search/jobs/'+sid, shell=True,
+                                           + '/servicesNS/'+username+'/'+app_name+'/search/jobs/'+sid, shell=True,
                                            universal_newlines=True)
     # wait 3 minutes to see if the query is done
     sleep_time = 180
@@ -13,12 +21,14 @@ def verify_search_done(api_key, splunk_server, username, app_name, sid, flag_que
         flag_query_is_done = True
         return flag_query_is_done
     else:
-        if timer == 0:
-            return flag_query_is_done
-        elif timer > 0:
+        for i in range(num_timer):
             sleep(sleep_time)
-            timer -= 1
-            verify_search_done(api_key, splunk_server, username, app_name, sid, flag_query_is_done, timer)
+            queried_done = subprocess.check_output('curl -k -H \"Authorization: Splunk ' + api_key + '\" '
+                                                   + splunk_server+'/servicesNS/'+username+'/'+app_name+'/search/jobs/'
+                                                   + sid, shell=True, universal_newlines=True)
+            if queried_done.split('<s:key name="isDone">')[1].split('</s:key>')[0] == "1":
+                return True
+        return flag_query_is_done
 
 
 def search_query(api_key, splunk_server, username, app_name, search_term, time_range):
@@ -57,11 +67,7 @@ def main():
     timer = 5
     search_done = verify_search_done(api_key, splunk_server, username, app_name, sid, flag_query_is_done, timer)
     if search_done:
-        output_aux = subprocess.check_output('curl -k -H \"Authorization: Splunk ' + api_key + '\" '+splunk_server
-                                             + '/servicesNS/'+username+'/'+ app_name+'/search/jobs/' + sid
-                                             + '/results --get -d output_mode=csv -d count=0', shell=True,
-                                             universal_newlines=True)
-        output = output_aux.split('\n')
+        output = get_output(splunk_server, username, app_name, api_key, sid)
         print(output)
     else:
         print('Could not find a search')
