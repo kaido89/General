@@ -72,3 +72,7 @@ Docker Bench for security<br>
 <b>WAF</b><br>
 Modsecurity<br>
 Naxsi<br>
+<b>Code Security</b><br>
+OWASP Dependency Check - https://www.owasp.org/index.php/OWASP_Dependency_Check<br>
+NPM audit + Fix - https://docs.npmjs.com/auditing-package-dependencies-for-security-vulnerabilities<br>
+Retire.js - https://retirejs.github.io/retire.js/ <br>
