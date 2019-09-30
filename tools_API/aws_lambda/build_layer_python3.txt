@@ -9,9 +9,9 @@ mkdir -p $LIB_DIR
 # 2 - Install the library to LIB_DIR
 pip3 install $PY_PACKAGE -t $LIB_DIR
 
-# 3 - Zip all the dependencies to boto3-latest.zip
+# 3 - Zip all the dependencies to boto3-latest.zip and Exclude MAC DS_store
 cd $PY_PACKAGE
-zip -r ../$PY_PACKAGE .
+zip -r ../$PY_PACKAGE . -x "*.DS_Store"
 
 # 4 - Publish the layer
 aws lambda publish-layer-version --layer-name $PY_PACKAGE --zip-file fileb://$PY_PACKAGE.zip   
