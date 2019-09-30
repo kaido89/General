@@ -11,7 +11,7 @@ pip3 install $PY_PACKAGE -t $LIB_DIR
 
 # 3 - Zip all the dependencies to boto3-latest.zip
 cd $PY_PACKAGE
-zip -r ../$PY_PACKAGE $PY_PACKAGE.zip
+zip -r ../$PY_PACKAGE .
 
 # 4 - Publish the layer
 aws lambda publish-layer-version --layer-name $PY_PACKAGE --zip-file fileb://$PY_PACKAGE.zip   
