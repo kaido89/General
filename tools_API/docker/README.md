@@ -1,5 +1,5 @@
 <H1>Security best practices</H1>
-<br>
+
 * Check ls /run/secrets/<br>
 
 ```
