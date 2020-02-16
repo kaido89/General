@@ -78,5 +78,12 @@ Retire.js - https://retirejs.github.io/retire.js/ <br>
 <br>
   <b>AWS Least Privalege</b><br>
 repokid - https://github.com/Netflix/repokid <br>
+<br>
   <b>Vulnerability Sandbox</b><br>
 DVWA - https://github.com/ethicalhack3r/DVWA <br>
+<br>
+  <b>Test Vulnerabilities</b><br>
+metasploitable3 - https://github.com/rapid7/metasploitable3 <br>
+<br>
+  <b>Vulnerabilities DB </b><br>
+cve mitre - https://cve.mitre.org/ <br>
