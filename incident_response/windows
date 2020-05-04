@@ -1,0 +1,6 @@
+wmic nicconfig where (ServiceName="e1iexpress") get Description, IPAddress
+netstat -nao
+taskmgr.exe
+tasklist /v
+wmic process list full
+sc query | more
