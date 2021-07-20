@@ -10,3 +10,6 @@ whoami
 #Docker Registry
 curl http://HOST:5000/v2/_catalog
 curl http://HOST:5000/v2/REPO_NAME/tags/list
+curl http://HOST:5000/v2/REPO_NAME/manifests/TAGNAME
+wget -O 1.tar.gz  http://HOST:5000/v2/REPO_NAME/blobs/BLOBSUMSHA256
+for i in *.tar.gz; do tar -xzvf $i; done
