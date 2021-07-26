@@ -9,4 +9,5 @@ capsh --print
     ```
     mount /dev/sda /mnt/
     chroot ./ bash
+    chroot /mnt/ adduser kaido89
     ```
